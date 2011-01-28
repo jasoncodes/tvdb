@@ -177,7 +177,7 @@ class Tvdb
       @name = details["EpisodeName"].to_s
       @overview = details["Overview"].to_s
       @air_date = details["FirstAired"].to_s
-      @thumb = "http://thetvdb.com/banners/" + details["filename"] if details["filename"].to_s != ""
+      @thumb = "http://thetvdb.com/banners/" + details["filename"].to_s if details["filename"].to_s != ""
     end
   end
 

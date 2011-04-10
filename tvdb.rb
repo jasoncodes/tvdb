@@ -24,13 +24,11 @@ class Tvdb
   end
 
   def http_get(url)
-    puts "escaped uri: " + url
     Net::HTTP.get_response(URI.parse(url)).body.to_s
   end
   
   def find_series_id_by_name(series_name)
     series_name = URI.escape(series_name).gsub('&', '%26').gsub(':', '%3A')
-    puts "#{@host}/GetSeries.php?seriesname=#{series_name}"
     response = XmlSimple.xml_in(http_get("#{@host}/GetSeries.php?seriesname=#{series_name}"), { 'ForceArray' => false })
     case response["Series"]
     when Array
@@ -52,7 +50,6 @@ class Tvdb
   end
   
   def find_series_by_id(series_id)
-    puts "#{@host}/#{API_KEY}/series/#{series_id}/en.xml"
     response = XmlSimple.xml_in(http_get("#{@host}/#{API_KEY}/series/#{series_id}/en.xml"), { 'ForceArray' => false })
     Series.new(response["Series"])
   end

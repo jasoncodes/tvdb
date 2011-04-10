@@ -16,6 +16,7 @@ require 'rubygems'
 require 'net/http'
 require 'xmlsimple'
 require 'cgi'
+require 'date'
 
 class Tvdb
   API_KEY = "A97A9243F8030477"

@@ -3,6 +3,7 @@
 #  Created by Jon Maddox on 2007-08-16.
 #  Copyright (c) 2007. All rights reserved.
 
+$: << File.dirname(__FILE__) + '/../lib'
 require 'tvdb'
 
 tvdb = Tvdb.new

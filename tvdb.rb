@@ -23,8 +23,16 @@ class Tvdb
     @host = 'http://www.thetvdb.com/api'
   end
 
-  def http_get(url)
-    Net::HTTP.get_response(URI.parse(url)).body.to_s
+  def http_get(url, limit = 5)
+    case response = Net::HTTP.get_response(URI.parse(url))
+    when Net::HTTPSuccess
+      response.body.to_s
+    when Net::HTTPRedirection
+      response.error! if limit <= 0
+      http_get response['location'], limit - 1
+    else
+      response.error!
+    end
   end
   
   def find_series_id_by_name(series_name)

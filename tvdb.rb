@@ -115,12 +115,12 @@ class Tvdb
       @id = details["id"]
       @name = details["SeriesName"]
       @overview = details["Overview"] unless details["Overview"].class == Hash
-      @first_aired = Date.parse(details["FirstAired"]) if details["FirstAired"].size > 0 
-      @genres = details["Genre"][1..-1].split("|") if details["Genre"].size > 0 
+      @first_aired = Date.parse(details["FirstAired"]) if details["FirstAired"] && details["FirstAired"].size > 0
+      @genres = details["Genre"][1..-1].split("|") if details["Genre"] && details["Genre"].size > 0
       @network = details["Network"]
-      @runtime = details["Runtime"] if details["Runtime"].size > 0
+      @runtime = details["Runtime"] if details["Runtime"] && details["Runtime"].size > 0
 
-      if details["Rating"].size > 0
+      if details["Rating"] && details["Rating"].size > 0
         @rating = details["Rating"].to_f
       else
         @rating = 0
